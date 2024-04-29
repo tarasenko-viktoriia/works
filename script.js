@@ -10,7 +10,7 @@ function rain (){
 
         drops += `
             <div class= "drop" style ="
-                    left:${index}%";
+                    left:${index}%;
                     bottom: ${randomBottom + 100}%;
                     animation-delay: 0.${randomAnimate}s;
                     animation-duration: 0.5${randomAnimate}s;">

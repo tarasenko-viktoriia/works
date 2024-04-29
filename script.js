@@ -1,33 +1,48 @@
 "use strict"
 
-function rain (){
-    const rainContainer = document.querySelector('.rain');
-    let drops = '';
+window.addEventListener('load', windowLoad)
 
-    for (let index = 0; index < 100; index++) {
-        const randomAnimate = Math.floor(Math.random() * 98 + 2);
-        const randomBottom = Math.floor(Math.random() * 4 + 2);
+function windowLoad () {
+    if (document.querySelector ("[data-glow]")) {
+        document.documentElement.addEventListener ("mouseover", buttonActions);
+        document.documentElement.addEventListener ("mouseout", buttonActions);
+        document.documentElement.addEventListener ("mousemove", buttonActions);
 
-        drops += `
-            <div class= "drop" style ="
-                    left:${index}%;
-                    bottom: ${randomBottom + 100}%;
-                    animation-delay: 0.${randomAnimate}s;
-                    animation-duration: 0.5${randomAnimate}s;">
-                <div class= "stem" style="
-                    animation-delay: 0.${randomAnimate}s;
-                    animation-duration: 0.5${randomAnimate}s;">
-                </div>
-                <div class= "splat" style="
-                    animation-delay: 0.${randomAnimate}s;
-                    animation-duration: 0.5${randomAnimate}s;">
-                </div>
-            </div>`;
+        let bGlow, bGlowColor, bGlowSize;
+        function buttonActions (e) {
+            const button = e.target.closest ("[data-glow]");
+            if (!button) return;
+    
+            if(e.type === "mouseover") {
+                button.insertAdjacentHTML ("beforeend", `
+                <span class="button__glow">
+                <span class="button__color"></span>
+                </span>
+            `);
+            bGlow = button.querySelector (".button__glow");
+            bGlowColor = button.querySelector (".button__color");
+
+            bGlowSize = Math.min(button.offsetWidth, button.offsetHeight);
+            bGlow.style.width = bGlow.style.height = `${bGlowSize}px`;
+    
+            bGlowColor.style.width = `${button.offsetWidth}px`;
+            bGlowColor.style.height = `${button.offsetHeight}px`;
+            }
+            if(e.type === "mouseout") {
+                button.querySelector(".button__glow").remove ();
+            }
+            if(e.type === "mousemove") {
+                const posX = e.pageX - (button.getBoundingClientRect().left - scrollX);
+                const posY = e.pageY - (button.getBoundingClientRect().top - scrollY);
+    
+                bGlow.style.left = `${posX -bGlowSize / 2}px`;
+                bGlow.style.top = `${posY -bGlowSize / 2}px`;
+
+                bGlowColor.style.transform = `
+                    translate(${posX - (button.offsetWidth - bGlowSize / 2)}px,
+                                ${posY - (button.offsetHeight - bGlowSize / 2)}px, )
+                `;
+            }
+        }
     }
-    rainContainer.innerHTML = drops;
-}
-window.addEventListener("load", windowLoad);
-
-function windowLoad (){
-    rain();
 }

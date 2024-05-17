@@ -1,3 +1,209 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.sec-container{
+  border: 5px solid #000;
+}
+
+#title {
+    background: linear-gradient(to left, violet, indigo, blue,
+     green, yellow, orange, red, orange, yellow,green, blue, indigo, violet);
+    background-clip: text;  /*Це властивість задає область заповнення фону тільки в межах тексту. Іншими словами, градієнт застосовується лише до тексту, а не до фону всього елемента */
+    display: inline;
+    color: transparent; /*Робить колір тексту прозорим, так що видно лише градієнт. */
+    animation: animated 5s linear infinite; /*  повторюється нескінченно. */
+}
+@keyframes animated {
+    to {
+        background-position-x: 160px; /* Визначає кінцевий стан анімації, де фонове зображення (градієнт) буде зміщене на 160 пікселів по осі X. Це створює ефект руху градієнта. */
+    }
+    
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.container {
+  /* width: 100%; на всю ширину екрану */
+  width: 820px;
+  height: 340px;
+  display: flex;
+  gap: 10px;
+  /* margin-inline: 50px; */
+}
+
+.card {
+  /* min-width: 70px;
+  height: 100%; */
+  border-radius: 30px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: flex-end;
+  flex-grow: 1;
+  cursor: pointer;
+  position: relative;
+  transition: flex-grow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+  --transition-timing: 0.35s; 
+}
+/* .card.active {
+  flex-grow: 100;
+}  */
+.card:hover {  /* через це збільшуються картинку при ховері */
+  flex-grow: 7;
+}  
+
+.card > .background {
+  position: absolute;
+  inset: 0;
+  object-fit: cover; 
+  object-position: center;
+  filter: brightness(0.4);
+  z-index: -1;
+  transition: var(--transition-timing) ease;
+}
+.card:hover > .background {
+  filter: brightness(1);
+}
+
+.card > .card-content {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 20px;
+  overflow: hidden;
+  transition: var(--transition-timing);
+  z-index: 10;
+}
+.card:hover > .card-content {
+  inset: 20px;
+  top: auto;
+}
+
+.card-content > * {
+  transition: var(--transition-timing);
+}
+
+.card-content > .profile-image {
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.card:hover .profile-image {
+  border: 1px solid rgb(110, 252, 205);
+}
+.profile-image > svg {
+  stroke: #fefefe;
+}
+.card:hover .profile-image > svg {
+  stroke: rgb(110, 252, 205);
+}
+
+.card-content > .title {
+  white-space: pre;
+  margin-left: 10px;
+  translate: 0 100%;
+  opacity: 0;
+}
+.card:hover .title {
+  opacity: 1;
+  translate: 0 0;
+  color: rgb(110, 252, 205);
+}
+
+.card > .backdrop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  z-index: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.card1 {
+  max-width: 400px;
+  min-height: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Забезпечує повну висоту батьківського елемента */
+  position: relative; /* Для абсолютного позиціювання внутрішніх елементів */
+  overflow: hidden; /* Щоб приховати вміст, що виходить за межі картки */
+}
+
+.face {
+  flex: 1; /* Розподіляє простір рівномірно */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* Забезпечує, що падінги не впливають на розмір */
+  transition: transform 0.3s ease; 
+}
+
+.face.face1 {
+  background-color: #ff0057;
+  z-index: 1;
+  height: 50%;
+}
+
+.face.face2 {
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+  height: 50%; 
+  transform: translateY(-200px); 
+}
+/* .card1:hover .face.face1 {
+  transform: translateY(-400px); 
+} */
+
+.card1:hover .face.face2 {
+  transform: translateY(0); 
+}
+.content {
+  padding: 20px;
+  box-sizing: border-box;
+}
+.face.face2 h3 {
+  position: relative;
+  margin: 0;
+}
+
+
+/* .container1 .card1:hover .face.face1 {
+    background: #ff0057;
+    transform: translateY(0px);
+}
+
+.container1 .card1:hover .face.face2 {
+    transform: translateY(0);
+} */ */
 #button {
     padding: 10px;
     border-radius: 30%;
